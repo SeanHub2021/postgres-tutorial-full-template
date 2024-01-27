@@ -8,6 +8,24 @@ connection = psycopg2.connect(database="chinook")
 # this is similar to a set or list, similar to an array in JS
 cursor = connection.cursor()
 
+# Query 1 - select all records from the "artist" variable
+#cursor.execute('SELECT * FROM "artist"')
+
+# Query 2 - select only the "name" column from the "artist" table
+# cursor.execute('SELECT "name" FROM "artist"')
+
+# Query 3 - select only "Queen" from the "artist" table
+# cursor.execute('SELECT * FROM "Artist" WHERE "Name" = %s', ["Queen"])
+
+# Query 4 - select only by "artistid" #51 from the "artist" table
+# cursor.execute('SELECT * FROM "artist" WHERE "artist_id" =%s', [51])
+
+# Query 5 - select only the albums with "artist_id" #51 on the "album" table
+# cursor.execute('SELECT * FROM "album" where "artist_id" = %s', [51])
+
+# Query 6 - select all tracks where the composer is "Queen" from the "track" table
+cursor.execute('SELECT * FROM "track" WHERE "composer" = %s', ["Queen"])
+
 # fetch the results (multiple), creates a variable named 'results' to retrieve data from the array/cursor
 # this will handle any result that gets queried
 results = cursor.fetchall()
